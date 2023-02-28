@@ -1,13 +1,3 @@
-<?php
-    session_start();
-    if (isset($_SESSION['user'])) {
-        if ($_SESSION['user']['type'] !== 'admin') {
-        header('location: /items.php');
-        }
-    } elseif (!isset($_SESSION['user'])) {
-        header('location: /items.php');
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,28 +7,29 @@
     <title>Document</title>
      <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container mx-auto py-5 px-10 bg-slate-50 flex-1">
+<body class="min-h-screen">
+    <div class="container mx-auto min-h-screen bg-slate-50">
+    <div class="container border-b py-5 px-10 bg-slate-50 flex-1">
         <div class="header">
-            <ul class="flex justify-between">
+            <ul class="flex justify-between items-center">
                 <li>
                     <nav>
                         <ul class="flex">
                             <li class=" mr-5">
-                                <a class="hover:text-sky-400 " href="/">Головна</a>
+                                <a class="hover:text-sky-400 duration-200" href="/">Home</a>
                             </li>
                             <li>
-                                <a class="hover:text-sky-400 " href="/items.php">Каталог</a>
+                                <a class="hover:text-sky-400 duration-200" href="/items.php">Store</a>
                             </li>
                         </ul>
                     </nav>
                 </li>
                 <li>
                     <ul class="flex">
-                        <li class="text-slate-100 hover:bg-sky-700 hover:shadow-md ursor-pointer bg-sky-500 px-3 py-1 rounded mr-5">
+                        <li class="text-slate-100 hover:bg-sky-700 hover:shadow-md ursor-pointer bg-sky-500 px-3 py-1 ease-in duration-200 rounded mr-5">
                             <a href="/admin-panel">Admin panel</a>
                         </li>
-                        <li class="text-slate-100 hover:bg-sky-700 hover:shadow-md ursor-pointer bg-sky-500 px-3 py-1 rounded">
+                        <li class="text-slate-100 hover:bg-sky-700 hover:shadow-md ursor-pointer bg-sky-500 px-3 py-1 ease-in duration-200 rounded">
                             <a href="/log-out">exit</a>
                         </li>
                     </ul>
@@ -49,29 +40,30 @@
     <div class="container mx-auto my-auto py-5 px-10 bg-slate-50">
         <div class="container create-item-container">
             <form action="/item-create" method="post" class="flex flex-col">
-                <div class="flex block flex-col w-80">
-                    <label for="name">Name of product</label>
-                    <input class="py-2 px-3" id="name" type="text" name="name" placeholder="product name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : '';?>">
+                <div class="flex block flex-col w-80 mb-5">
+                    <label for="name" class='mb-3'>Name of product</label>
+                    <input class="py-2 px-3 " id="name" type="text" name="name" placeholder="product name">
                 </div>
-                <div class="flex appearance-none block flex-col w-80">
-                    <label for="guest_price">Guest price</label>
-                    <input class="py-2 px-3 appearance-none" id="guest_price" type="number" name="guest_price" placeholder="guest price" value="<?php echo isset($_POST['guest_price']) ? $_POST['guest_price'] : '';?>">
+                <div class="flex appearance-none block flex-col w-80 mb-5">
+                    <label for="guest_price" class='mb-3'>Guest price</label>
+                    <input class="py-2 px-3 appearance-none " id="guest_price" type="number" name="guest_price" placeholder="guest price">
                 </div>
-                <div class="flex block flex-col w-80">
-                    <label for="user_price">User price</label>
-                    <input class="py-2 px-3" id="user_price" type="number" name="user_price" placeholder="user price" value="<?php echo isset($_POST['user_price']) ? $_POST['user_price'] : '';?>">
+                <div class="flex block flex-col w-80 mb-5">
+                    <label for="user_price" class='mb-3'>User price</label>
+                    <input class="py-2 px-3 " id="user_price" type="number" name="user_price" placeholder="user price">
                 </div>
-                <div class="flex block flex-col w-80">
-                    <label for="amount">Amount</label>
-                    <input class="py-2 px-3" id="amount" type="number" name="amount" placeholder="amount" value="<?php echo isset($_POST['amount']) ? $_POST['amount'] : 0;?>">
+                <div class="flex block flex-col w-80 mb-5">
+                    <label for="amount" class='mb-3'>Amount</label>
+                    <input class="py-2 px-3 " id="amount" type="number" name="amount" placeholder="amount">
                 </div>
-                <div class="flex block flex-col w-80">
-                    <label for="description">Description</label>
-                    <textarea class="py-2 px-3" id="description" name="description" rows="3"></textarea>
+                <div class="flex block flex-col w-80 mb-5">
+                    <label for="description" class='mb-3'>Description</label>
+                    <textarea class="py-2 px-3 " id="description" name="description" rows="3"></textarea>
                 </div>
                 <button type="submit" class="text-slate-100 hover:bg-sky-700 hover:shadow-md cursor-pointer bg-sky-500 px-3 py-1 rounded w-40">add</button>
             </form>
         </div>
+    </div>
     </div>
 </body>
 </html>

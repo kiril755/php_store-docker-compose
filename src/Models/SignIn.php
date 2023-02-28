@@ -1,6 +1,5 @@
 <?php
 namespace Models;
-session_start();
 
 
 class SignIn{
@@ -10,9 +9,7 @@ class SignIn{
         
         $data = $db->query("SELECT * FROM `users` WHERE `email` = '$email' AND`password` = '$password'");
         if (!mysqli_num_rows($data)) {
-            $_POST['error'] = 'email or password is incorrect!';
-            include '../Views/signIn.php';
-            return;
+            return $_POST['error'] = 'email or password is incorrect!';
         } else {
             $data = $data->fetch_assoc();
             $_SESSION['user'] = [
@@ -25,7 +22,6 @@ class SignIn{
             if (isset($_SESSION['cart'])) {
                 unset($_SESSION['cart']);
             }
-            header('location: /');
         }
     }
     public static function adminAuthorize($post, $db) {
@@ -34,16 +30,12 @@ class SignIn{
         
         $data = $db->query("SELECT * FROM `users` WHERE `email` = '$email' AND`password` = '$password'");
         if (!mysqli_num_rows($data)) {
-            $_POST['error'] = 'email or password is incorrect!';
-            include '../Views/adminAuth.php';
-            return;
+            return $_POST['error'] = 'email or password is incorrect!';
         } 
         $data = $data = $data->fetch_assoc();
 
         if ((int) $data['type_id'] !== 2){
-            $_POST['error'] = 'You doesnt have admin permission!';
-            include '../../Views/adminAuth.php';
-            return;
+            return $_POST['error'] = 'You doesnt have admin permission!';
         } else {
             $_SESSION['user'] = [
                 'id' => $data['id'],
@@ -55,7 +47,6 @@ class SignIn{
             if (isset($_SESSION['cart'])) {
                 unset($_SESSION['cart']);
             }
-            header('location: /');
         }
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers\admin;
+session_start();
 
 require_once '../../database/DatabaseMysql.php';
 require_once '../../Models/admin/Panel.php';
@@ -8,10 +9,12 @@ require_once '../../Models/admin/Panel.php';
 use database\DatabaseMysql;
 use Models\admin\Panel;
 
+
 class PanelController {
     public static function index() {
         if (!isset($_SESSION['user']) || isset($_SESSION['user']) && $_SESSION['user']['type'] !== 'admin') {
             header('location: /');
+            return;
         }
         $db = new DatabaseMysql;
         $connection = $db->dbConnect();

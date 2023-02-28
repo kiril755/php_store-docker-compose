@@ -2,9 +2,15 @@
 namespace Controllers;
 session_start();
 
+
+require_once '../Models/LogOut.php';
+
+use Models\LogOut;
+
+
 class LogOutController {
     public static function logOut() {
-        session_destroy();
+        LogOut::sessionDestroy();
         header('location: /');
     }
 }

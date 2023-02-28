@@ -1,11 +1,17 @@
 <?php
 namespace database;
 
-
 class DatabaseMysql {
-    public function dbConnect (){
-        $connection = mysqli_connect('mysql', 'root', 'root', 'database');
-        return $connection;
+    private $connection;
+
+    public function __construct() {
+        $this->connection = mysqli_connect('mysql', 'root', 'root', 'database');
+        if (!$this->connection) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
     }
 
+    public function dbConnect() {
+        return $this->connection;
+    }
 }

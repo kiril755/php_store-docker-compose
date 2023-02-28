@@ -1,10 +1,9 @@
 <?php
 namespace Models\cart;
 
-session_start();
-
 class Index {
     public static function index($db) {
+        $data = array();
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = array();
         }
@@ -13,28 +12,30 @@ class Index {
 
         if (!count($_SESSION['cart'])) {
             $empty = 'Your cart is empty :(';
-            include '../../Views/cart.php';
-            return;
+            array_push($data, $empty, $items);
+            return $data;
         }
 
         foreach ($cartItemsId as $cartItemId) {
             if (isset($_SESSION['user'])) {
                 if ($_SESSION['user']['type'] == 'user') {
-                    $data = $db->query("SELECT `id`, `name`, `user_price` AS 'price', `amount`, `description` FROM `items` WHERE `id` = $cartItemId");
-                    if (mysqli_num_rows($data)) {
-                        array_push($items, $data->fetch_assoc());
+                    $dataDb = $db->query("SELECT `id`, `name`, `user_price` AS 'price', `amount`, `description` FROM `items` WHERE `id` = $cartItemId");
+                    if (mysqli_num_rows($dataDb)) {
+                        array_push($items, $dataDb->fetch_assoc());
                     }
                 }
             } else {
-                $data = $db->query("SELECT `id`, `name`, `guest_price` AS 'price', `amount`, `description` FROM `items` WHERE `id` = $cartItemId");
-                if (mysqli_num_rows($data)) {
-                    array_push($items, $data->fetch_assoc());
+                $dataDb = $db->query("SELECT `id`, `name`, `guest_price` AS 'price', `amount`, `description` FROM `items` WHERE `id` = $cartItemId");
+                if (mysqli_num_rows($dataDb)) {
+                    array_push($items, $dataDb->fetch_assoc());
                 }
             }
         }
+        array_push($data, $items);
         if (!count($items)) {
             $empty = 'Our store is empty :(';
+            array_push($data, $empty, $items);
         }
-        include '../../Views/cart.php';
+        return $data;
     }
 }

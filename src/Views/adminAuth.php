@@ -1,9 +1,4 @@
-<?php
-    session_start();
-    if (isset($_SESSION['user'])) {
-        header('location: /');
-    }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +53,7 @@
             <form method="post" action="/admin-authorize" class="flex flex-col">
                 <?php
                     if (isset($_POST['error'])) {
-                        echo '<div>' . $_POST['error'] . '</div>';
+                        echo '<div class="text-red-500">' . $_POST['error'] . '</div>';
                     }
                 ?>
                 <div class="flex block flex-col w-80 mb-5">

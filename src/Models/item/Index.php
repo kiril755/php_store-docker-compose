@@ -1,7 +1,5 @@
 <?php
 namespace Models\item;
-session_start();
-
 
 class Index {
     public static function index($db) {
@@ -16,8 +14,7 @@ class Index {
         }
         if (!mysqli_num_rows($data)) {
             $empty = 'Our store is empty :(';
-            include '../../Views/items.php';
-            return;
+            return $empty;
         }
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = array();
@@ -28,9 +25,6 @@ class Index {
             array_push($items, $itemData);
         }
 
-        // echo '<pre>';
-        // var_dump($_SESSION);
-        // echo '</pre>';
-        include '../../Views/items.php';
+        return $items;
     }
 }

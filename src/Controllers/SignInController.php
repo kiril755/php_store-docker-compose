@@ -1,5 +1,6 @@
 <?php
 namespace Controllers;
+session_start();
 
 require_once '../database/DatabaseMysql.php';
 require_once '../Models/SignIn.php';
@@ -9,9 +10,20 @@ use Models\SignIn;
 
 class SignInController {
     public static function signIn ()  {
+        if (isset($_SESSION['user'])) {
+            header('location: /');
+            return;
+        }
         $db = new DatabaseMysql();
         $connection = $db->dbConnect();
-        SignIn::login($_POST, $connection);
+        $result = SignIn::login($_POST, $connection);
+        if (is_string($result)) {
+            include '../Views/signIn.php';
+            return;
+        } else {
+            header('location: /');
+            return;
+        }
     }
 }
 

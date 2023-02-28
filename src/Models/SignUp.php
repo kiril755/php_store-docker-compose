@@ -1,6 +1,5 @@
 <?php
 namespace Models;
-session_start();
 
 class SignUp {
     public static function create($post, $db) {
@@ -26,12 +25,11 @@ class SignUp {
             }
         }
         if ($anyError) {
-            include '../Views/signUp.php';
-            return;
+            return $anyError;
         }
         $password = md5($post['password']);
-
-        $db->query("INSERT INTO `users`(`name`, `email`, `password`) VALUES('$post[name]', '$post[email]', '$password')");
+        $name = htmlspecialchars($post['name']);
+        $db->query("INSERT INTO `users`(`name`, `email`, `password`) VALUES('$name', '$post[email]', '$password')");
         $newUser = $db->query("SELECT * FROM `users` WHERE `email` = '$post[email]' AND `password` = '$password'")->fetch_assoc();
 
         if (isset($_SESSION['cart'])) {
@@ -42,7 +40,6 @@ class SignUp {
             'name' => $newUser['name'],
             'type' => 'user',
         ];
-        $_SESSION['welcome'] = "Welcome $post[name]!";
-        header('location: /');
+        $_SESSION['welcome'] = "Welcome $name!";
     }
 }

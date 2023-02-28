@@ -48,6 +48,9 @@
                         <ul>
                             <?php
                                 foreach ($users as $user) {
+                                    if ($user['id'] == 0) {
+                                        continue;
+                                    }
                                     $identCheckForBtn = $_SESSION['user']['id'] == $user['id'] 
                                     ? "<a class='text-slate-100 hover:shadow-md bg-gray-500 px-3 py-1 rounded'>you</a>" 
                                     : "<a class='text-slate-100 hover:bg-red-700 hover:shadow-md cursor-pointer bg-red-500 px-3 py-1 rounded' href='/admin-panel/user/delete?id=$user[id]'>delete</a>";
@@ -100,7 +103,7 @@
                     echo "<p class='text-red-500'>$guestOrders</p>";
                 } else {
                     ?>
-                        <h2 class="mb-5">User orders:</h2>
+                        <h2 class="mb-5">Guest orders:</h2>
                         <ul>
                             <?php
                                 foreach ($guestOrders as $guestOrder) {

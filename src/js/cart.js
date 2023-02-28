@@ -11,7 +11,6 @@ addToCartBtn.forEach((button) => {
     button.addEventListener("click", () => {
         if (itemCountCart.textContent < 20) {
             const itemId = button.dataset.itemId;
-            // send AJAX request to server to add item to cart
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/cart/add");
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -37,7 +36,6 @@ deleteFromCartBtn.forEach((button) => {
     const ul = li.parentNode;
     
     const itemId = button.dataset.itemId;
-    // send AJAX request to server to add item to cart
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "/cart/delete");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

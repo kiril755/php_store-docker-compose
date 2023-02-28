@@ -1,8 +1,4 @@
-<?php
-    if (isset($_SESSION['user']) && $_SESSION['user']['type'] == 'admin') {
-        header('location: /');
-    }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +42,7 @@
                                 } elseif ($_SESSION['user']['type']=== 'user') {
                                     echo 
                                     '
-                                    <li class="text-slate-100 hover:bg-sky-700 hover:shadow-md cursor-pointer ease-in duration-200 bg-sky-500 rounded">
+                                    <li class="text-slate-100 hover:bg-sky-700 hover:shadow-md cursor-pointer ease-in duration-200 bg-sky-500 rounded mr-5">
                                         <a href="/log-out" class="px-3 py-1 block">exit</a>
                                     </li>
                                     <li class="text-slate-100 hover:bg-sky-700 hover:shadow-md cursor-pointer ease-in duration-200 bg-sky-500 rounded relative">

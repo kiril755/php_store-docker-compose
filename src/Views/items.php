@@ -105,7 +105,7 @@
                                 </h2>
                             </li>
                         <?php
-                    } elseif (isset($data)){
+                    } elseif (isset($items)){
                         foreach ($items as $item) {
                             $guest_price = array_key_exists('guest_price', $item) ? " (guest price: $item[guest_price])" : '';
                             echo
