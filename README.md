@@ -34,3 +34,7 @@ phpMyAdmin - 8081;
 max@gmail.com  - maxpassword  
 john@gmail.com - johnpassword  
 admin@gmail.com - adminpassword
+
+## Mysql
+u - root
+p - root
