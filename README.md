@@ -18,16 +18,17 @@ Install my-project
   docker-compose up -d
 ```
     
-## Ports
-
-nginx - 80;  
-phpMyAdmin - 8081;
-
 
 ## After all
 
  - [application](http://localhost) localhost
  - [phpMyAdmin](http://localhost:8081/) localhost:8081
+
+
+## Ports
+
+nginx - 80;  
+phpMyAdmin - 8081;
 
 
 ## Users data
